@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
-use Alert;
 
 class StudentController extends Controller
 {
@@ -56,8 +55,6 @@ class StudentController extends Controller
         unset($data['first_name'], $data['last_name']);
 
         $student = Student::create($data);
-
-        Alert::success('Student added successfully.', 'createSuccess');
 
         return redirect('/students');
     }
