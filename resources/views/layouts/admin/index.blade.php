@@ -7,14 +7,14 @@
 <title>@yield('title', 'Dashboard') &mdash; {{ env('APP_NAME') }}</title>
 
 <!-- Fontawesome -->
-<link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+<link rel="stylesheet" href="{{ secure_asset('assets/fontawesome/css/all.css') }}">
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
 
 <!-- CSS -->
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
 
 </head>
 
@@ -49,14 +49,14 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('assets/js/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('assets/js/momment.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/jquery-3.3.1.min.js') }}" charset="utf-8"></script>
+    <script src="{{ secure_asset('assets/js/popper.min.js') }}" charset="utf-8"></script>
+    <script src="{{ secure_asset('assets/js/bootstrap.min.js') }}" charset="utf-8"></script>
+    <script src="{{ secure_asset('assets/js/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/momment.min.js') }}"></script>
 
     <!-- Script -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/app.js') }}"></script>
 
     <!-- Sweet Alert -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
