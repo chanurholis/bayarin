@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/students', 'StudentController@index');
 Route::get('/students/create', 'StudentController@create');
 Route::post('/students', 'StudentController@store');
+Route::get('/students/{student}/edit', 'StudentController@edit');
+Route::patch('/students/{student}', 'StudentController@update');
+Route::delete('/students/{student}', 'StudentController@destroy');
+Route::get('/students/{student}', 'StudentController@show');

@@ -9,10 +9,6 @@
 <!-- Fontawesome -->
 <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
 
-<!-- Sweet Alert -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
-
 <!-- CSS -->
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -57,9 +53,6 @@
 
     <!-- Script -->
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- Sweet Alert -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
 
 </body>
 
