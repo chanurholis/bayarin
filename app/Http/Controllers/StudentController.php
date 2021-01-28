@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
-use Alert;
+use Illuminate\View\View;
 
 class StudentController extends Controller
 {
@@ -13,17 +13,15 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        $students   = Student::get()->all();
+        $students   = Student::orderBy('first_name', 'ASC')->paginate(10);
         $count      = Student::get()->count();
 
         return view('vendor.students.index', [
             'students' => $students,
             'count'    => $count
         ]);
-
-        Alert::success('Student added successfully.', 'createSuccess');
 
         return view('vendor.students.index');
     }
@@ -33,7 +31,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('vendor.students.create');
     }
@@ -46,20 +44,30 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'name'          => 'nullable',
+            'nisn'          => 'required|numeric',
+            'nis'           => 'required|numeric',
+            'date_of_birth' => 'required|date',
+            'gender'        => 'required',
+            'classroom'     => 'required',
+            'phone_number'  => 'required|numeric',
+            'email'         => 'required|email',
+            'address'       => 'required'
+        ]);
+
         $data = [];
         foreach ($request->all() as $key => $value) {
             $data[$key] = $value;
         }
 
-        $data['name']   = $request->first_name . " " . $request->last_name;
+        $data['name'] = $data['first_name'] . " " . $data['last_name'];
 
-        unset($data['first_name'], $data['last_name']);
+        Student::create($data);
 
-        $student = Student::create($data);
-
-        Alert::success('Student added successfully.', 'createSuccess');
-
-        return redirect('/students');
+        return redirect('/students/create')->with('status', 'Student data was successfully added!');
     }
 
     /**
@@ -70,7 +78,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('vendor.students.show', compact('student'));
     }
 
     /**
@@ -79,9 +87,23 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit(Student $student): View
     {
-        //
+        $classrooms = [
+            1,
+            2
+        ];
+
+        $genders    = [
+            'Male',
+            'Female'
+        ];
+
+        return view('vendor.students.edit', [
+            'model'         => $student,
+            'classrooms'    => $classrooms,
+            'genders'       => $genders
+        ]);
     }
 
     /**
@@ -93,7 +115,30 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'name'          => 'nullable',
+            'nisn'          => 'required|numeric',
+            'nis'           => 'required|numeric',
+            'date_of_birth' => 'required|date',
+            'gender'        => 'required',
+            'classroom'     => 'required',
+            'phone_number'  => 'required|numeric',
+            'email'         => 'required|email',
+            'address'       => 'required'
+        ]);
+
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $data['name'] = $data['first_name'] . " " . $data['last_name'];
+
+        $student->update($data);
+
+        return redirect('/students')->with('status', 'Student data has been changed successfully!');
     }
 
     /**
@@ -104,6 +149,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        Student::destroy($student->id);
+
+        return redirect('/students');
     }
 }

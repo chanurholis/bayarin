@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.admin.index');
-});
+Route::get('/', 'AdminController@index');
 
-Route::get('/students', 'StudentController@index');
-Route::get('/students/create', 'StudentController@create');
-Route::post('/students', 'StudentController@store');
+Route::resource('students', 'StudentController');
+
+Auth::routes();
+
+Route::get('/admin', 'AdminController@index')->name('admin');

@@ -5,6 +5,11 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        @if (session('status'))
+        <div class="alert alert-primary">
+            {{ session('status') }}
+        </div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <h4>Students <span>({{ $count }})</span></h4>
@@ -20,33 +25,35 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">NISN</th>
-                <th scope="col">NIS</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Classroom</th>
                 <th scope="col">Phone Number</th>
-                <th scope="col">Address</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($students as $student)      
             <tr>
-                <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $student['name'] }}</td>
-                <td>{{ $student['nisn'] }}</td>
-                <td>{{ $student['nis'] }}</td>
                 <td>{{ $student['gender'] }}</td>
                 <td>
-                    @if ($student['classroom_id'] == 1)
+                    @if ($student['classroom'] == 1)
                         {{ "12 RPL 1" }}
-                    @elseif ($student['classroom_id'] == 2)
+                    @elseif ($student['classroom'] == 2)
                         {{ "12 RPL 2" }}
                     @endif
                 </td>
                 <td>{{ $student['phone_number'] }}</td>
-                <td>{{ $student['address'] }}</td>
+                <td>
+                    <form action="{{ '/students/' . $student['id'] }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        <a href="{{ '/students/' . $student['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                        <a href="{{ '/students/' . $student['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
