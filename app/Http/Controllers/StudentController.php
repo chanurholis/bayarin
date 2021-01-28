@@ -15,7 +15,7 @@ class StudentController extends Controller
      */
     public function index(): View
     {
-        $students   = Student::get()->all();
+        $students   = Student::orderBy('first_name', 'ASC')->paginate(10);
         $count      = Student::get()->count();
 
         return view('vendor.students.index', [
@@ -67,7 +67,7 @@ class StudentController extends Controller
 
         Student::create($data);
 
-        return redirect('/students/create')->with('status', 'Student has added successfully!');
+        return redirect('/students/create')->with('status', 'Student data was successfully added!');
     }
 
     /**
@@ -78,7 +78,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        dd($student);
+        return view('vendor.students.show', compact('student'));
     }
 
     /**
@@ -116,19 +116,29 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'name'          => 'required',
-            'nisn'          => 'required',
-            'nis'           => 'required',
-            'date_of_birth' => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'name'          => 'nullable',
+            'nisn'          => 'required|numeric',
+            'nis'           => 'required|numeric',
+            'date_of_birth' => 'required|date',
             'gender'        => 'required',
-            'classroom_id'  => 'required',
-            'phone_number'  => 'required',
-            'address'       => 'required',
+            'classroom'     => 'required',
+            'phone_number'  => 'required|numeric',
+            'email'         => 'required|email',
+            'address'       => 'required'
         ]);
 
-        $student->update($request->all());
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            $data[$key] = $value;
+        }
 
-        return redirect('/students');
+        $data['name'] = $data['first_name'] . " " . $data['last_name'];
+
+        $student->update($data);
+
+        return redirect('/students')->with('status', 'Student data has been changed successfully!');
     }
 
     /**
