@@ -17,6 +17,6 @@
 
             <!-- Classrooms -->
             <li class="menu-header">Classroom</li>
-            <li><a class="nav-link" href="/students"><i class="fas fa-university"></i> <span>Classrooms</span></a></li>
+            <li><a class="nav-link" href="/classrooms"><i class="fas fa-university"></i> <span>Classrooms</span></a></li>
     </aside>
 </div>

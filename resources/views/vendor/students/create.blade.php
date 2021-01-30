@@ -80,8 +80,9 @@
                         <div class="col-sm-12 col-md-7">
                             <select class="form-control @error('classroom') is-invalid @enderror" value="{{ old('classroom') }}" name="classroom">
                                 <option value="" selected>-- Select Classroom -- </option>
-                                <option value="1">12 RPL 1</option>
-                                <option value="2">12 RPl 2</option>
+                                @foreach ($classrooms as $classroom)
+                                    <option value="{{ $classroom['id'] }}">{{ $classroom['classroom'] }}</option>
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">
                                 @error('classroom') {{ $message }} @enderror

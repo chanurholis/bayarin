@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -33,7 +34,9 @@ class StudentController extends Controller
      */
     public function create(): View
     {
-        return view('vendor.students.create');
+        $classrooms = Classroom::all();
+
+        return view('vendor.students.create', compact('classrooms'));
     }
 
     /**
@@ -89,10 +92,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student): View
     {
-        $classrooms = [
-            1,
-            2
-        ];
+        $classrooms = Classroom::all();
 
         $genders    = [
             'Male',
