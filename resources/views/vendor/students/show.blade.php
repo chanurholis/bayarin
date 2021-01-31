@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <th scope="col">Classroom</th>
-                    <td>{{ $student['classroom'] }}</td>
+                    <td>{{ $student->class->classroom }}</td>
                 </tr>
                 <tr>
                     <th scope="col">Phone Number</th>

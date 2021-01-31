@@ -87,14 +87,10 @@
                             <select class="form-control @error('classroom') is-invalid @enderror" value="{{ old('classroom') }}" name="classroom">
                                 <option value="" selected>-- Select Classroom -- </option>
                                 @foreach ($classrooms as $classroom)
-                                    @if ($classroom == $model['classroom'])
-                                        @if ($classroom == 1)
-                                        <option value="{{ $model['classroom'] }}" selected>12 RPL 1</option>
-                                        @else 
-                                        <option value="{{ $model['classroom'] }}" selected>12 RPL 2</option>
-                                        @endif
+                                    @if ($classroom->id == $model['classroom'])
+                                    <option value="{{ $classroom->id }}" selected>{{ $classroom->classroom }}</option>
                                     @else 
-                                    <option value="{{ $classroom }}}">{{ $classroom }}</option>
+                                    <option value="{{ $classroom->id }}">{{ $classroom->classroom }}</option>
                                     @endif
                                 @endforeach
                             </select>
