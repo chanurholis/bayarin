@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>@yield('title', 'Login') &mdash; {{ env('APP_NAME') }}</title>
+        <title>@yield('title', 'Login') &mdash; {{ config('app.name') }}</title>
 
         <!-- Fontawesome -->
         <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
@@ -19,17 +19,17 @@
                     <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
                         <div class="p-4 m-3">
                             <div class="mb-5 mt-2"></div>
-                            <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">{{ env('APP_NAME') }}</span></h4>
+                            <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">{{ config('app.name') }}</span></h4>
                             <p class="text-muted">Before you get started, you must login or register if you don't already have an account.</p>
-                            <form method="post" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                            <form method="post" action="{{ route('login') }}">
                                 @csrf
 
                                 <!-- Email -->
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" tabindex="1">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autofocus tabindex="1">
                                     <div class="invalid-feedback">
-                                        Please fill in your email
+                                        @error('email') {{ $message }}  @enderror
                                     </div>
                                 </div>
 
@@ -40,24 +40,24 @@
                                     </div>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" tabindex="2" >
                                     <div class="invalid-feedback">
-                                        please fill in your password
+                                        @error('password') {{ $message }}  @enderror
                                     </div>
                                 </div>
 
                                 <!-- Remember Me -->
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
                                     <label class="custom-control-label" for="remember-me">Remember Me</label>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Forgot Password -->
                                 <div class="form-group text-right">
-                                    <a href="auth-forgot-password.html" class="float-left mt-3">
+                                    <a href="{{ route('password.request') }}" class="float-left mt-3">
                                     Forgot Password?
                                     </a>
-                                    <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="3">
                                         Login
                                     </button>
                                 </div>
@@ -74,11 +74,11 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-8 mt-2 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="img/unsplash/login-bg.jpg">
+                    <div class="col-lg-8 mt-2 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="img/background/wavy_bus.jpg">
                         <div class="absolute-bottom-left index-2">
-                            <div class="text-light p-5 pb-2">
+                            <div class="text-white p-5 pb-2">
                                 <div class="mb-5 pb-3">
-                                    <h1 class="mb-2 display-4 font-weight-bold">Good Morning</h1>
+                                    <h1 class="mb-2 display-3 font-weight-bold">{{ $clock->format('H:i') }}</h1>
                                     <h5 class="font-weight-normal text-muted-transparent">Subang, Indonesia</h5>
                                 </div>
                             </div>
