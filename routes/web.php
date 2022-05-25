@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,7 @@ Route::get('/', 'AdminController@index');
 
 // Student
 Route::resource('students', 'StudentController');
+
 // Classroom
 Route::resource('classrooms', 'ClassroomController');
 
